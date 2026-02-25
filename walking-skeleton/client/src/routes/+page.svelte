@@ -1,5 +1,9 @@
 <script>
     import {PUBLIC_API_URL} from "$env/static/public";
+    import Header from "$lib/components/Header.svelte";
+    import Footer from "$lib/components/Footer.svelte";
+
+
     let todos = $state([]);
 
     const fetchTodos = async () => {
@@ -12,6 +16,10 @@
     })
 </script>
 
+
+<Header />
+
+
 <h1>Todos</h1>
 
 <ul>
@@ -19,3 +27,5 @@
     <li>{todo.name}</li>
     {/each}
 </ul>
+
+<Footer />
