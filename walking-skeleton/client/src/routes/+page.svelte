@@ -4,8 +4,14 @@
     import Footer from "$lib/components/Footer.svelte";
 
 
-    let todos = $state([]);
+    let todos = $state([
+        {id: 1, text: "Run", done: false},
+        {id: 2, text: "Buy groceries", done: false},
+        {id:3, text: "Sleep", done:true},
+    ]);
+    let changedTodos = $state([]);
     let text = $state("");
+    let todoText = $state("");
     let isChecked = $state(false);
     let countState = $state({
         count: 0,
@@ -27,15 +33,30 @@
         }
     };
 
+    const markDone = (id) => {
+        todos = todos.map((t) =>
+      t.id === id ? {...t, done: true} : t
+    );
 
-    const fetchTodos = async () => {
+    }
+    const addTodo = () => {
+        const item = {
+            id: todos.length + 1,
+            text: todoText,
+            done: false,
+        };
+        todos.push(item);
+        todoText = "";
+    }
+
+    /*const fetchTodos = async () => {
         const response = await fetch(`${PUBLIC_API_URL}/api/todos`);
         const data = await response.json();
         todos = data; 
     };
     $effect(()=> {
         fetchTodos();
-    })
+    })*/
 </script>
 
 
@@ -60,10 +81,20 @@
 
 <h1>Todos</h1>
 
+<input type="text" bind:value={todoText} placeholder="Add a todo"/>
+<button onclick={addTodo}>Add</button>
+<h2>Pending</h2>
 <ul>
-    {#each todos as todo}
-    <li>{todo.name}</li>
+    {#each todos.filter(todo => !todo.done) as todo}
+    <li>{todo.text}
+        <button onclick={() => markDone(todo.id)}>Mark Done</button>
+    </li>
     {/each}
 </ul>
-
+<h2>Completed</h2>
+<ul>
+    {#each todos.filter(todo => todo.done) as todo}
+    <li>{todo.text}</li>
+    {/each}
+</ul>
 <Footer />
