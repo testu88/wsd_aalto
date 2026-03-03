@@ -4,7 +4,7 @@
     import Footer from "$lib/components/Footer.svelte";
 
 
-    let todos = $state([
+    /*let todos = $state([
         {id: 1, text: "Run", done: false},
         {id: 2, text: "Buy groceries", done: false},
         {id:3, text: "Sleep", done:true},
@@ -19,9 +19,9 @@
         numbers: [],
     });
 
-    /*const textChanged = (event) => {
+    const textChanged = (event) => {
         text = event.target.value;
-    }*/
+    }
 
     const increment = () => {
         countState.count++;
@@ -49,7 +49,7 @@
         todoText = "";
     }
 
-    /*const fetchTodos = async () => {
+    const fetchTodos = async () => {
         const response = await fetch(`${PUBLIC_API_URL}/api/todos`);
         const data = await response.json();
         todos = data; 
@@ -60,7 +60,7 @@
 </script>
 
 
-<Header />
+<!--<Header />
 
 <p>Text : {text}</p>
 <input type="text" bind:value={text} />
@@ -76,12 +76,13 @@
 <p>You have less than 10.</p>
 {:else}
 <p>You have more than 10.</p>
-{/if}
+{/if}-->
 
 
-<h1>Todos</h1>
+<h1>Welcome!</h1>
+<a href="/todos">Go to Todos</a>
 
-<input type="text" bind:value={todoText} placeholder="Add a todo"/>
+<!--<input type="text" bind:value={todoText} placeholder="Add a todo"/>
 <button onclick={addTodo}>Add</button>
 <h2>Pending</h2>
 <ul>
@@ -97,4 +98,4 @@
     <li>{todo.text}</li>
     {/each}
 </ul>
-<Footer />
+<Footer />-->
