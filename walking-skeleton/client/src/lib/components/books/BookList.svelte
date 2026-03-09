@@ -9,7 +9,7 @@
     {#each bookState.books as book}
     <li>
         <a href={`/books/${book.id}`}>{book.name}</a>
-        <button onclick={bookState.deleteBook(book.id)}>delete</button>
+        <button onclick={() => bookState.deleteBook(book.id)}>delete</button>
     </li>
     {/each}
 </ul>

@@ -4,12 +4,12 @@
 
     let chapterState = useChapterState();
 
-    let name = $state("");
-    const addChapter = (name) => {
-        chapterState.addChapter(bookId, name);
-        name = "";
+    let chapterName = $state("");
+    const addChapter = () => {
+        chapterState.addChapter(bookId, chapterName);
+        chapterName = "";
     }
 </script>
 
-<input type="text" bind:value={name} placeholder="Chapter name" />
-<button onclick={() => addChapter(name)}>Add Chapter</button>
+<input type="text" bind:value={chapterName} placeholder="Chapter name" />
+<button onclick={addChapter}>Add Chapter</button>

@@ -1,4 +1,12 @@
-let chapterState = $state({
+import {browser} from "$app/environment";
+const KEY = "chapters";
+let initialChapters = {};
+if (browser && localStorage.getItem(KEY) !== null){
+  initialChapters = JSON.parse(localStorage.getItem(KEY));
+};
+let chapterState = $state(initialChapters);
+
+/*let chapterState = $state({
   1: [
     { id: 1, name: "Hamster Homes" },
     { id: 2, name: "Tiny Tables" },
@@ -15,7 +23,12 @@ let chapterState = $state({
     { id: 2, name: "Many Errors" },
     { id: 3, name: "Fifty More Bugs" },
   ],
-});
+});*/
+
+const saveChapters = () => {
+  localStorage.setItem(KEY, JSON.stringify(chapterState));
+};
+
 
 const useChapterState = () => {
     return {
@@ -23,8 +36,14 @@ const useChapterState = () => {
             return chapterState;
         },
         addChapter: (id, chapter) => {
-            chapterState[id].length > 0 ? chapterState[id].push({id: chapterState[id].length+1, name: chapter}) :
-            chapterState[id].push([{id:1, name:chapter}])
+           if (!chapterState[id]){
+            chapterState[id] = [];
+           };
+           chapterState[id].push({
+            id: chapterState[id].length +1,
+            name: chapter,
+           });
+           saveChapters();
         }
     };
 };

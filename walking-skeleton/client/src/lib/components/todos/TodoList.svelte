@@ -7,13 +7,18 @@
     { id: 2, name: 'Second todo' },
     { id: 3, name: 'Third todo' }
     ]);*/
+    const removeTodo = (id) => {
+        todoState.removeTodo(id);
+    };
 </script>
+
 
 <h1>Todos</h1>
 <ul>
     {#each todoState.todos as todo}
     <li>
         <a href={`/todos/${todo.id}`}>{todo.name}</a>
+        <button onclick={() => removeTodo(todo.id)}>Remove</button>
     </li>
     {/each}
 </ul>
