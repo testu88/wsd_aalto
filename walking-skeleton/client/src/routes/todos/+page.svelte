@@ -1,6 +1,8 @@
+<script>
+    import TodoList from "$lib/components/todos/TodoList.svelte";
+    import AddTodo from "$lib/components/todos/AddTodo.svelte";
+</script>
 
 
-<h1>Todos</h1>
-<a href="/todos/1">Open todo 1</a>
-<br>
-<a href="/todos/1/tasks/1">Open todo 1, task 1</a>
+<TodoList />
+<AddTodo />

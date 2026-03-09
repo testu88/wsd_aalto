@@ -1,0 +1,15 @@
+<script>
+    import {useBookState} from "$lib/states/bookState.svelte";
+
+    let bookState = useBookState();
+</script>
+
+
+<ul>
+    {#each bookState.books as book}
+    <li>
+        <a href={`/books/${book.id}`}>{book.name}</a>
+        <button onclick={bookState.deleteBook(book.id)}>delete</button>
+    </li>
+    {/each}
+</ul>
