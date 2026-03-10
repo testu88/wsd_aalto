@@ -19,9 +19,6 @@
   taskState.resetTasks();
   taskState.tasks[todoId] ??= [];
   
-  const removeTask = (id) => {
-    taskState.removeTask(id);
-  };
 </script>
 
 
@@ -29,7 +26,7 @@
     {#each taskState.tasks[todoId] as task}
     <li>
         <a href={`/todos/${todoId}/tasks/${task.id}`}>{task.name}</a>
-        <button onclick={() => removeTask(task.id)}>Remove</button>
+        <button onclick={() => taskState.removeTask(todoId,task.id)}>Remove</button>
     </li>
     {/each}
 </ul>

@@ -1,13 +1,13 @@
 import {browser} from "$app/environment";
-let KEY = "todos";
+let TODO_KEY = "todos";
 let initialTodos = [];
-if (browser && localStorage.getItem(KEY) !== null){
-    initialTodos = JSON.parse(localStorage.getItem(KEY));
+if (browser && localStorage.getItem(TODO_KEY) !== null){
+    initialTodos = JSON.parse(localStorage.getItem(TODO_KEY));
 };
 let todoState = $state(initialTodos);
 
 const saveTodos = () => {
-    localStorage.setItem(KEY, JSON.stringify(todoState));
+    localStorage.setItem(TODO_KEY, JSON.stringify(todoState));
 }
 
 const useTodoState = () => {
@@ -19,13 +19,13 @@ const useTodoState = () => {
             return todoState.find((t)=> t.id === id);
         },
         addTodo: (todo) => {
-            todoState.length > 0 ? todoState.push({id: todoState.length+1, name: todo}) 
-            : todoState.push({id: 1, name: todo});
-            saveTodos();
+           todoState.push({id: todoState.length + 1, name: todo});
+           saveTodos(); 
         },
         removeTodo: (id) => {
-            todoState.filter((t) => t.id != id);
+            todoState = todoState.filter((t) => t.id != id);
             saveTodos();
+            
         },
     };
 };
