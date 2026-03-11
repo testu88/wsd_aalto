@@ -2,21 +2,19 @@
     import {useTodoState} from "$lib/states/todoState.svelte";
     let todoState = useTodoState();
     
-    /*let todos = $state([
-    { id: 1, name: 'First todo' },
-    { id: 2, name: 'Second todo' },
-    { id: 3, name: 'Third todo' }
-    ]);*/
-   
 </script>
 
 
 <h1>Todos</h1>
 <ul>
     {#each todoState.todos as todo}
+    {#if todo}
     <li>
         <a href={`/todos/${todo.id}`}>{todo.name}</a>
         <button onclick={() => todoState.removeTodo(todo.id)}>Remove</button>
     </li>
+    {:else}
+    <p>Loading...</p>
+    {/if}
     {/each}
 </ul>

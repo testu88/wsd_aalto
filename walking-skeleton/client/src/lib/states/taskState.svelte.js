@@ -1,6 +1,6 @@
 import {browser} from "$app/environment";
 
-let TASK_KEY = "tasks";
+const TASK_KEY = "tasks";
 let initialTasks = {};
 if (browser && localStorage.getItem(TASK_KEY) !== null) {
     initialTasks = JSON.parse(localStorage.getItem(TASK_KEY));
@@ -24,9 +24,12 @@ const useTaskState = () => {
             saveTasks();
         },
         removeTask: (todoId,taskId) => {
-            console.log("remove todo id and task id:", todoId, taskId);
-            taskState[todoId] = taskState[todoId].filter((t)=> t.id !== taskId);
-            console.log("state of remove task", taskState[todoId]);
+            
+            const index = taskState[todoId].findIndex((t) => t.id === taskId);
+            if (index !== -1){
+                taskState[todoId].splice(index, 1);
+            }
+            
             saveTasks();
         },
         resetTasks: (id) => {
