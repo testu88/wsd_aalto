@@ -27,12 +27,7 @@ const useTodoState = () => {
            saveTodos(); 
         },
         removeTodo: (id) => {
-           
-            const index = todoState.findIndex((t) => t.id === id);
-            if (index !== -1){
-                todoState.splice(index, 1);
-            }
-           
+           todoState = todoState.filter((t) => t.id !== id);
             saveTodos();  
         },
        resetTodos: (id) => {

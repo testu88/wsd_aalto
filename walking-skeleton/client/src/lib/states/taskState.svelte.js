@@ -24,12 +24,7 @@ const useTaskState = () => {
             saveTasks();
         },
         removeTask: (todoId,taskId) => {
-            
-            const index = taskState[todoId].findIndex((t) => t.id === taskId);
-            if (index !== -1){
-                taskState[todoId].splice(index, 1);
-            }
-            
+            taskState[todoId] = taskState[todoId].filter((t) => t.id !== taskId);
             saveTasks();
         },
         resetTasks: (id) => {
