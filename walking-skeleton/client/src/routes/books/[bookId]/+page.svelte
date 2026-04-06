@@ -1,14 +1,16 @@
 <script>
     import {page} from "$app/state";
     import Book from "$lib/components/books/Book.svelte";
-    import AddChapter from "$lib/components/books/AddChapter.svelte";
+    import ChapterForm from "$lib/components/books/ChapterForm.svelte";
     let bookId = $derived(parseInt(page.params.bookId));
     
 </script>
 
-
+<h1>Book {bookId}</h1>
 <Book bookId={bookId} />
-<AddChapter bookId={bookId}/>
+
+<h2>Add a chapter</h2>
+<ChapterForm bookId={bookId}/>
 
 <!---<p>book {bookId}</p>
 

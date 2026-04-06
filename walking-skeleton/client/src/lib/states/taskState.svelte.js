@@ -16,11 +16,11 @@ const useTaskState = () => {
         get tasks() {
             return taskState;
         },
-        addTask: (id,task) => {
-            if (!taskState[id]) {
-           taskState[id] = []; 
+        addTask: (todoId,task) => {
+            if (!taskState[todoId]){
+                taskState[todoId] = [];
             };
-            taskState[id].push({id: taskState[id].length+1, name: task});
+            taskState[todoId].push(task);
             saveTasks();
         },
         removeTask: (todoId,taskId) => {
@@ -31,6 +31,22 @@ const useTaskState = () => {
             taskState[id] = [];
             saveTasks();
         },
+        toggleDone: (todoId, task) => {
+            if (!taskState[todoId]){
+                return;
+            };
+            const tasks = taskState[todoId];
+            const index = tasks.findIndex((t) => t.id === task.id);
+            if (index === -1) {
+                return;
+            };
+            const updatedTask = {
+              ...tasks[index], is_done: !tasks[index].is_done
+            };
+           tasks[index] = updatedTask;
+           taskState[todoId] = [...tasks];
+            saveTasks();
+        }
     };
 };
 

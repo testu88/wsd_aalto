@@ -4,8 +4,15 @@
 
     let {bookId} = $props();
     let bookState = useBookState();
-    let book = bookState.getOne(bookId);
+    const book = $derived(bookState.getOne(bookId));
 </script>
 
-<h1>{book ? book.name : "Loading..."}</h1>
+{#if book}
+    <h1>{book.title}</h1>
+   <p> <strong>Description: </strong>  {book.description}</p>
+    <p><strong>Published at:</strong>  {book.published_at}</p>
+    <p><strong>Page Count: </strong>   {book.page_count}</p>
+{:else}
+    <p>Loading...</p>
+{/if}
 <ChapterList {bookId} />

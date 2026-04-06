@@ -23,8 +23,9 @@ const useTodoState = () => {
             return todoState.find((t)=> t.id === id);
         },
         addTodo: (todo) => {
-           todoState.push({id: todoState.length + 1, name: todo});
-           saveTodos(); 
+            todo.id = todoState.length + 1;
+            todoState.push(todo);
+            saveTodos(); 
         },
         removeTodo: (id) => {
            todoState = todoState.filter((t) => t.id !== id);

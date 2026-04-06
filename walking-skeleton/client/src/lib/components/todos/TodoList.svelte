@@ -5,7 +5,7 @@
 </script>
 
 
-<h1>Todos</h1>
+
 <ul>
     {#each todoState.todos as todo}
     {#if todo}

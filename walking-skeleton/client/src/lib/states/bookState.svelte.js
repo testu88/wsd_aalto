@@ -24,11 +24,12 @@ const useBookState = () => {
         getOne: (id) => {
             return bookState.find((b) => b.id === id);
         },
-        addBook: (name) => {
-            bookState.push({id: bookState.length + 1, name});
+        addBook: (book) => {
+            book.id = bookState.length + 1;
+            bookState.push(book);
             saveBooks();
         },
-        deleteBook: (id) => {
+        deleteById: (id) => {
             bookState = bookState.filter((b) => b.id != id);
             saveBooks();
         }

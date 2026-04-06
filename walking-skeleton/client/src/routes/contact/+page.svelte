@@ -1,3 +1,6 @@
+<script>
+    import Contacts from "$lib/components/Contacts.svelte";
+</script>
 <svelte:head>
     <title>
         Contact
@@ -5,4 +8,4 @@
 </svelte:head>
 
 
-<p>You can contact me here.</p>
+<Contacts />

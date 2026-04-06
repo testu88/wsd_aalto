@@ -36,14 +36,16 @@ const useChapterState = () => {
             return chapterState;
         },
         addChapter: (id, chapter) => {
-           if (!chapterState[id]){
+          if (!chapterState[id]){
             chapterState[id] = [];
-           };
-           chapterState[id].push({
-            id: chapterState[id].length +1,
-            name: chapter,
-           });
+          };
+           chapter.book_id = id;
+           chapter.id = chapterState[id].length + 1;
+           chapterState[id].push(chapter);
            saveChapters();
+        },
+        reset: () => {
+          localStorage.clear();
         }
     };
 };

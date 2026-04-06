@@ -6,14 +6,16 @@
 
     let bookState = useBookState();
     let chapterState = useChapterState();
-    let book = bookState.getOne(bookId);
-    let chapter = chapterState.chapters[bookId]?.find((c) => c.id === chapterId);
+    let book = $derived(bookState.getOne(bookId));
+    let chapter = $derived(chapterState.chapters[bookId]?.find((c) => c.id === chapterId));
+
 </script>
 
 <h1>{book ? book.name: "Loading..."}</h1>
-{#if chapter}
-<h2>{chapter.name}</h2>
+{#if chapter }
+<h2>{chapter.title}</h2>
 <p>This is chapter {chapter.id} of book {book.id}</p>
+<p>{chapter.content}</p>
 {:else}
 <p>Loading...</p>
 {/if}

@@ -3,7 +3,7 @@
     import {useTodoState} from "$lib/states/todoState.svelte";
     let {todoId} = $props();
     let todoState = useTodoState();
-    let todo = todoState.getOne(todoId);
+    let todo = $derived(todoState.getOne(todoId));
 
 </script>
 

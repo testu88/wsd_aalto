@@ -1,9 +1,10 @@
 <script>
     import BookList from "$lib/components/books/BookList.svelte";
-    import AddBook from "$lib/components/books/AddBook.svelte";
+    import BookForm from "$lib/components/books/BookForm.svelte";
 </script>
 
 <h1>Books</h1>
-
-<AddBook />
 <BookList />
+
+<h2>Add a Book</h2>
+<BookForm />
