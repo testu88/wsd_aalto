@@ -3,17 +3,17 @@ import postgres from "postgres";
 // create instance of database client
 const sql = postgres();
 
-const create = async (book) => {
+const createBook = async (book) => {
     const result = await sql`INSERT INTO books (title, description, published_at, page_count) VALUES (
     ${book.title}, ${book.description}, ${book.published_at}, ${book.page_count}) RETURNING *;`;
     return result[0];
 };
 
-const readAll = async () => {
+const readBooks = async () => {
     return await sql `SELECT * FROM books`;
 };
 
-const readOne = async (id) => {
+const readBook = async (id) => {
     return await sql`SELECT * FROM books WHERE id = ${id}`;
 }
  
@@ -27,4 +27,4 @@ const deleteOne = async (id) =>{
     return result[0];
 };
 
-export { create, readAll, readOne, update, deleteOne };
+export { createBook, readBooks, readBook, update, deleteOne };

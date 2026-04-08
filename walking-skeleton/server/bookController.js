@@ -9,12 +9,12 @@ const create = async (c) => {
     if (!data.title || !data.description || !data.published_at || !data.page_count){
         return c.json({error: "Missing required fields"}, 400);
     };
-    const newBook = await bookRepository.create(data);
+    const newBook = await bookRepository.createBook(data);
     return c.json(newBook, 201);
 };
 
 const readAll = async (c) => {
-    const chapters = await bookRepository.readALL();
+    const chapters = await bookRepository.readBooks();
     return c.json(chapters);
 };
 
@@ -24,7 +24,7 @@ const readOne = async (c) => {
         return c.json({error: "Invalid book id"},400);
     };
     
-    const book = await bookRepository.readOne(bookId);
+    const book = await bookRepository.readBook(bookId);
     if (!book){
         return c.json({error: "Book not found"}, 404);
     };

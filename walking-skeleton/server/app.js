@@ -1,8 +1,8 @@
 import { Hono } from "@hono/hono";
 import { cors } from "@hono/hono/cors";
 import { logger } from "@hono/hono/logger";
-//import * as bookController from "./bookController.js";
-//import * as chapterController from "./chapterController.js";
+import * as bookController from "./bookController.js";
+import * as chapterController from "./chapterController.js";
 import * as todoController from "./todoController.js";
 import * as taskController from "./taskController.js";
 
@@ -14,7 +14,7 @@ app.use("/*", logger());
 
 
 //SQL client commands
-/*
+
 app.get("/api/books", bookController.readAll);
 app.get("/api/books/:bookId", bookController.readOne);
 app.post("/api/books", bookController.create);
@@ -27,7 +27,7 @@ app.get("/api/books/:bookId/chapters/:chapterId", chapterController.readOne);
 app.post("/api/books/:bookId/chapters", chapterController.create);
 app.delete("/api/books/:bookId/chapters/:chapterId", chapterController.deleteOne);
 app.put("/api/books/:bookId/chapters/:chapterId", chapterController.update);
-*/
+
 
 app.get("/api/todos", todoController.readAll);
 app.get("/api/todos/:todoId",  todoController.readOne);

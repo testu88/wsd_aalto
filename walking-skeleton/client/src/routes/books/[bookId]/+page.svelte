@@ -3,7 +3,11 @@
     import Book from "$lib/components/books/Book.svelte";
     import ChapterForm from "$lib/components/books/ChapterForm.svelte";
     let bookId = $derived(parseInt(page.params.bookId));
-    
+    import { initBook } from "$lib/states/bookState.svelte.js";
+
+    $effect(()=>{
+        initBook(bookId);
+    });
 </script>
 
 <h1>Book {bookId}</h1>
