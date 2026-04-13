@@ -1,10 +1,21 @@
 import {browser} from "$app/environment";
-const KEY = "chapters";
+import * as chaptersApi from "$lib/apis/chaptersApi.js";
+
+/*const KEY = "chapters";
 let initialChapters = {};
 if (browser && localStorage.getItem(KEY) !== null){
   initialChapters = JSON.parse(localStorage.getItem(KEY));
 };
-let chapterState = $state(initialChapters);
+
+const saveChapters = () => {
+  localStorage.setItem(KEY, JSON.stringify(chapterState));
+};*/
+let chapterState = $state({});
+
+const initBookChapters = async (bookId) => {
+  if (!browser) {return;};
+  chapterState[bookId] = await chaptersApi.readChapters(bookId);
+};
 
 /*let chapterState = $state({
   1: [
@@ -25,10 +36,6 @@ let chapterState = $state(initialChapters);
   ],
 });*/
 
-const saveChapters = () => {
-  localStorage.setItem(KEY, JSON.stringify(chapterState));
-};
-
 
 const useChapterState = () => {
     return {
@@ -36,13 +43,11 @@ const useChapterState = () => {
             return chapterState;
         },
         addChapter: (id, chapter) => {
-          if (!chapterState[id]){
-            chapterState[id] = [];
-          };
-           chapter.book_id = id;
-           chapter.id = chapterState[id].length + 1;
-           chapterState[id].push(chapter);
-           saveChapters();
+        chaptersApi.createChapter(id, chapter).then((newChapter) => {
+          const chapters = chapterState[id] || [];
+          chapters.push(newChapter);
+          chapterState[id] = chapters;
+        });
         },
         reset: () => {
           localStorage.clear();
@@ -50,4 +55,4 @@ const useChapterState = () => {
     };
 };
 
-export {useChapterState};
+export {initBookChapters, useChapterState};

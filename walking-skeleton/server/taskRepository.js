@@ -2,7 +2,7 @@ import postgres from "postgres";
 
 const sql = postgres();
 
-const create = async (todoId, task) => {
+const createTask = async (todoId, task) => {
   const result = await sql`
     INSERT INTO todo_tasks (todo_id, description)
     VALUES (${todoId}, ${task.description})
@@ -20,7 +20,7 @@ const deleteById = async ( id) => {
   return result[0];
 };
 
-const findAll = async (todoId) => {
+const findTasks = async (todoId) => {
   return await sql`
     SELECT * FROM todo_tasks
     WHERE todo_id = ${todoId};`;
@@ -46,4 +46,4 @@ const updateById = async (id, task) => {
   return result[0];
 };
 
-export { create, deleteById, findAll, findById, updateById };
+export { createTask, deleteById, findTasks, findById, updateById };

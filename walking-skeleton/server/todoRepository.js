@@ -3,7 +3,7 @@ import postgres from "postgres";
 const sql = postgres();
 
 // Repository Design Pattern
-const create = async (todo) => {
+const createTodo = async (todo) => {
     const result = await sql`INSERT INTO todos (name) VALUES (${todo.name})RETURNING *;`;
     return result[0];
 };
@@ -13,7 +13,7 @@ const deleteById = async (id) => {
     return result[0];
 };
 
-const findAll = async () => {
+const findTodos = async () => {
     return await sql`SELECT * FROM todos`;
 };
 
@@ -31,4 +31,4 @@ const updateById = async(id, todo) => {
 
 };
 
-export { findAll, create, findById, updateById, deleteById };
+export { findTodos, createTodo, findById, updateById, deleteById };

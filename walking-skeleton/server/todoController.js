@@ -6,11 +6,11 @@ const create = async (c) => {
     if (!data.name){
         return c.json({error: "Missing required fields"}, 400);
     };
-    const todo = await todoRepository.create(data);
+    const todo = await todoRepository.createTodo(data);
     return c.json(todo, 201);
 };
 const readAll = async (c) => {
-    const todos = await todoRepository.findAll();
+    const todos = await todoRepository.findTodos();
     return c.json(todos, 200);
 };
 

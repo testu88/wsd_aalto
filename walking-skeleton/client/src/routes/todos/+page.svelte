@@ -1,7 +1,11 @@
 <script>
     import TodoList from "$lib/components/todos/TodoList.svelte";
     import TodoForm from "$lib/components/todos/TodoForm.svelte";
-</script>
+    import { initTodos } from "$lib/states/todoState.svelte.js";
+    $effect(()=>{
+        initTodos();
+    });
+ </script>
 
 <h1>Todos</h1>
 <TodoList />

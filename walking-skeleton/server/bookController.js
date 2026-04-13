@@ -1,10 +1,10 @@
 import * as bookRepository from "./bookRepository.js";
 
 const create = async (c) => {
-    const bookId = Number(c.req.param("bookId"));
+    /*const bookId = Number(c.req.param("bookId"));
     if (!Number.isInteger(bookId)){
         return c.json({error: "Invalid book id"}, 400);
-    };
+    };*/
     const data = await c.req.json();
     if (!data.title || !data.description || !data.published_at || !data.page_count){
         return c.json({error: "Missing required fields"}, 400);

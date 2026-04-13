@@ -1,7 +1,6 @@
 <script>
-    import {useTodoState} from "$lib/states/todoState.svelte";
+    import {useTodoState} from "$lib/states/todoState.svelte.js";
     let todoState = useTodoState();
-    
 </script>
 
 

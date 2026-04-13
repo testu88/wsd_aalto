@@ -5,15 +5,25 @@ let bookState = $state([]);
 
 const initBooks = async () => {
     if (browser){
-         bookState = await booksApi.readBooks();
+         const books = await booksApi.readBooks();
+        
+         if (books.error){
+               
+                return;
+         };
+         bookState = books.data;
     };
 };
 
 const initBook = async (id) => {
     if (browser){
         const book = await booksApi.readBook(id);
-        if (book && !bookState.find((b)=> b.id === id)){
-            bookState.push(book);
+        if (book.error){
+      
+                return;
+            }
+        if (book.data && !bookState.find((b)=> b.id === id)){
+            bookState.push(book.data);
         };
     };
 };
@@ -40,23 +50,37 @@ const useBookState = () => {
         get books() {
             return bookState;
         },
-        addBook: (book) => {
-           booksApi.createBook(book).then((newBook) => {
-            bookState.push(newBook);
-           });
+        addBook: async (book) => {
+            const newBook = await booksApi.createBook(book)
+            if (newBook.error){
+                console.error(newBook.error);
+                return;
+            }
+            bookState.push(newBook.data);
         },
         deleteById: async (id) => {
             const removed =  await booksApi.deleteBook(id);
-            bookState = bookState.filter((b) => b.id !== removed.id);
+            if (removed.error){
+                console.error(removed.error);
+                return;
+            };
+            const index = bookState.findIndex((b) => b.id === removed.data.id);
+            if (index !== -1) {
+            bookState.splice(index, 1);
+            };
         },
-        updateById: (book) => {
-            booksApi.updateBook(book.id, book).then((updatedBook) => {
-                const index = bookState.findIndex((b) => b.id === updatedBook.id);
-                if (index !== -1){
-                    bookState[index] = updatedBook;
-                };
-            });
+        updateById: async (book) => {
+            const updatedBook = await booksApi.updateBook(book.id, book);
+            if (updatedBook.error){
+                console.error(updatedBook.error);
+                return;
+            }
+            const index = bookState.findIndex((b) => b.id === updatedBook.data.id);
+            if (index !== -1){
+                bookState[index] = updatedBook.data;
+            };
         },
+        
     };
 };
 

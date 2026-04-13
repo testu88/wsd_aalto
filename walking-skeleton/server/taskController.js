@@ -10,8 +10,8 @@ const create = async (c) => {
     if (!data.description){
         return c.json({error: "Missing required fields"}, 400);
     };
-    const newTodo = await taskRepository.create(todoId, data);
-    return c.json(newTodo, 201);
+    const newTask = await taskRepository.createTask(todoId, data);
+    return c.json(newTask, 201);
 };
 
 const readAll = async (c) => {
@@ -19,8 +19,8 @@ const readAll = async (c) => {
     if (!Number.isInteger(todoId)){
         return c.json({error: "Invalid todo id"}, 400);
     };
-    const todos = await taskRepository.findAll(todoId);
-    return c.json(todos, 200);
+    const tasks = await taskRepository.findTasks(todoId);
+    return c.json(tasks, 200);
 };
 
 const readOne = async (c) => {
