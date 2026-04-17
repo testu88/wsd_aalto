@@ -13,7 +13,6 @@ const readBook = async (id) => {
 };
 
 const createBook = async (book) => {
-    console.log("Book POST:", book);
     const newBook = await myFetch(`${PUBLIC_API_URL}/api/books`, {
         headers: { "Content-Type":"application/json", },
         method: "POST",
