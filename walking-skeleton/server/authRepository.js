@@ -4,6 +4,7 @@ const sql = postgres();
 
 const create = async (user) => {
     const result = await sql`INSERT INTO users (email, password_hash) VALUES (${user.email}, ${user.password_hash}) RETURNING id, email;`;
+    console.log("Result Api:", result);
     return result[0];
 };
 
