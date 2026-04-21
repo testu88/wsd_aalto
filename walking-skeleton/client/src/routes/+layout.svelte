@@ -1,7 +1,8 @@
 <script>
 	import favicon from '$lib/assets/favicon.svg';
-
+	import { useAuthState } from "$lib/states/authState.svelte.js";
 	let { children } = $props();
+	const authState = useAuthState();
 </script>
 
 <svelte:head>
@@ -10,7 +11,17 @@
 </svelte:head>
 
 <header>
-	<h1>My application</h1>
+	{#if authState.user}
+	<div>
+		<span>Hello, {authState.user.email}!</span>
+		<button onclick={() => authState.logout()}>Logout</button>
+	</div>
+	{:else}
+	<ul>
+		<li><a href="/auth/login">Login</a></li>
+		<li><a href="/auth/register">Register</a></li>
+	</ul>
+	{/if}
 </header>
 
 <nav>
@@ -22,10 +33,6 @@
 </nav>
 
 
-<div>
+<main>
 {@render children()}
-</div>
-
-<footer>
-	<p>My application is cool.</p>
-</footer>
+</main>
