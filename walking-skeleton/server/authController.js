@@ -18,7 +18,7 @@ const register = async (c) => {
             user: {id: newUser.id, email: newUser.email},
         });
     } catch (err) {
-        console.error("Register error:",err);
+        console.error("Register error:", err);
         return c.json({ message: `Confirmation email sent to address ${user.email}.`});
     };
     

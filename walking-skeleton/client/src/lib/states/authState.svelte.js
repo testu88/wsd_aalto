@@ -16,7 +16,7 @@ if (browser) {
         user = JSON.parse(storedUser);
     };
     if (storedToken){
-        token = JSON.parse(storedToken);
+        token = storedToken;
     };
 };
 

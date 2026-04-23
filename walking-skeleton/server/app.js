@@ -6,6 +6,8 @@ import * as chapterController from "./chapterController.js";
 import * as todoController from "./todoController.js";
 import * as taskController from "./taskController.js";
 import * as authController from "./authController.js";
+import * as middlewares from "./middlewares.js";
+import * as readingProgressController from "./readingProgressController.js";
 
 
 const app = new Hono();
@@ -49,8 +51,18 @@ app.get("/api/todos/:todoId/tasks/:taskId", taskController.readOne);
 app.put("/api/todos/:todoId/tasks/:taskId", taskController.update);
 app.delete("/api/todos/:todoId/tasks/:taskId", taskController.deleteOne);
 
+// Secret
+app.use("/api/secret", middlewares.authenticate);
+app.get("/api/secret", (c) => {
+    return c.json({ message: "This is a secret message!"});
+});
 
-
+// Reading Progress
+app.use("/api/reading-progress/*", middlewares.authenticate);
+app.get("/api/reading-progress", readingProgressController.getUserProgress);
+app.get("/api/reading-progress/book/:bookId", readingProgressController.getUserProgressForBook);
+app.post("api/reading-progress/book/:bookId", readingProgressController.createOrUpdateProgress);
+app.delete("api/reading-progress/book/:bookId", readingProgressController.deleteProgress);
 
 
 export default app;

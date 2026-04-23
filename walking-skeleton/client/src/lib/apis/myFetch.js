@@ -1,3 +1,5 @@
+// Abort the request after 2 tries
+
 const myFetch = async (url, options = {}, timeoutMs=5000) => {
     let attempts = 0;
     let maxAttempts = 2;
