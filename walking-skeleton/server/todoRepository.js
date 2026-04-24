@@ -3,27 +3,27 @@ import postgres from "postgres";
 const sql = postgres();
 
 // Repository Design Pattern
-const createTodo = async (todo) => {
-    const result = await sql`INSERT INTO todos (name) VALUES (${todo.name})RETURNING *;`;
+const createTodo = async (userId, todo) => {
+    const result = await sql`INSERT INTO todos (user_id, name) VALUES (${userId}, ${todo.name}) RETURNING *;`;
     return result[0];
 };
 
-const deleteById = async (id) => {
-    const result = await sql`DELETE FROM todos WHERE id = ${id} RETURNING *;`;
+const deleteById = async (userId, todoId) => {
+    const result = await sql`DELETE FROM todos WHERE user_id = ${userId} AND id = ${todoId} RETURNING *;`;
     return result[0];
 };
 
-const findTodos = async () => {
-    return await sql`SELECT * FROM todos`;
+const findTodos = async (userId) => {
+    return await sql`SELECT * FROM todos WHERE user_id = ${userId} ORDER BY created_at DESC`;
 };
 
-const findById = async (id) => {
-    const result = await sql`SELECT * FROM todos WHERE id = ${id}`;
+const findById = async (userId, todoId) => {
+    const result = await sql`SELECT * FROM todos WHERE user_id = ${userId} AND id = ${todoId}`;
     return result[0];
 };
 
-const updateById = async(id, todo) => {
-    const result = await sql`UPDATE todos SET name=${todo.name} WHERE id = ${id} RETURNING *;`;
+const updateById = async(userId, todoId, todo) => {
+    const result = await sql`UPDATE todos SET name=${todo.name} WHERE user_id = ${userId} AND id = ${todoId} RETURNING *;`;
     if (result.length === 0) {
         return undefined;
     };

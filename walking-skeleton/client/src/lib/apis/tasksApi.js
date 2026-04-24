@@ -1,17 +1,19 @@
 import { PUBLIC_API_URL } from "$env/static/public";
+import { authFetch } from "$lib/utils/fetchUtils.js";
+
 
 const getTasks = async (todoId) => {
-    const response = await fetch(`${PUBLIC_API_URL}/api/todos/${todoId}/tasks`);
+    const response = await authFetch(`${PUBLIC_API_URL}/api/todos/${todoId}/tasks`);
     return await response.json();
 };
 
 const getTask = async (todoId, taskId) => {
-    const response = await fetch(`${PUBLIC_API_URL}/api/todos/${todoId}/tasks/${taskId}`);
+    const response = await authFetch(`${PUBLIC_API_URL}/api/todos/${todoId}/tasks/${taskId}`);
     return await response.json();
 };
 
 const createTask = async (todoId, task) => {
-    const response = await fetch(`${PUBLIC_API_URL}/api/todos/${todoId}/tasks`, {
+    const response = await authFetch(`${PUBLIC_API_URL}/api/todos/${todoId}/tasks`, {
         headers: { "Content-Type":"application/json", },
         method: "POST",
         body: JSON.stringify(task),
@@ -20,7 +22,7 @@ const createTask = async (todoId, task) => {
 };
 
 const updateTask = async (todoId, task) => {
-    const response = await fetch(`${PUBLIC_API_URL}/api/todos/${todoId}/tasks/${task.id}`, {
+    const response = await authFetch(`${PUBLIC_API_URL}/api/todos/${todoId}/tasks/${task.id}`, {
         headers: { "Content-Type":"application/json", },
         method: "PUT",
         body: JSON.stringify(task),
@@ -29,7 +31,7 @@ const updateTask = async (todoId, task) => {
 };
 
 const deleteTask = async (todoId, taskId) => {
-    const response = await fetch(`${PUBLIC_API_URL}/api/todos/${todoId}/tasks/${taskId}`, {
+    const response = await authFetch(`${PUBLIC_API_URL}/api/todos/${todoId}/tasks/${taskId}`, {
         method: "DELETE",
     });
     return await response.json();

@@ -1,17 +1,19 @@
 import { PUBLIC_API_URL } from "$env/static/public";
+import { authFetch } from "$lib/utils/fetchUtils.js";
+
 
 const getTodos = async () => {
-    const response = await fetch(`${PUBLIC_API_URL}/api/todos`);
+    const response = await authFetch(`${PUBLIC_API_URL}/api/todos`);
     return await response.json();
 };
 
 const getTodo = async (todoId) => {
-    const response = await fetch(`${PUBLIC_API_URL}/api/todos/${todoId}`);
+    const response = await authFetch(`${PUBLIC_API_URL}/api/todos/${todoId}`);
     return await response.json();
 };
 
 const createTodo = async (todo) => {
-    const response = await fetch(`${PUBLIC_API_URL}/api/todos`, {
+    const response = await authFetch(`${PUBLIC_API_URL}/api/todos`, {
         headers: { "Content-Type":"application/json", },
         method: "POST",
         body: JSON.stringify(todo),
@@ -20,7 +22,7 @@ const createTodo = async (todo) => {
 };
 
 const updateTodo = async (id, todo) => {
-    const response = await fetch(`${PUBLIC_API_URL}/api/todos/${id}`, {
+    const response = await authFetch(`${PUBLIC_API_URL}/api/todos/${id}`, {
         headers: { "Content-Type":"application/json", },
         method: "PUT",
         body: JSON.stringify(todo),
@@ -29,7 +31,7 @@ const updateTodo = async (id, todo) => {
 };
 
 const deleteTodo = async (todoId) => {
-    const response = await fetch(`${PUBLIC_API_URL}/api/todos/${todoId}`, {
+    const response = await authFetch(`${PUBLIC_API_URL}/api/todos/${todoId}`, {
         method: "DELETE",
     });
     return await response.json();

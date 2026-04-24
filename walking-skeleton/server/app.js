@@ -38,6 +38,7 @@ app.delete("/api/books/:bookId/chapters/:chapterId", chapterController.deleteOne
 app.put("/api/books/:bookId/chapters/:chapterId", chapterController.update);
 
 // Todos
+app.use("/api/todos/*", middlewares.authenticate);
 app.get("/api/todos", todoController.readAll);
 app.get("/api/todos/:todoId",  todoController.readOne);
 app.post("/api/todos", todoController.create);

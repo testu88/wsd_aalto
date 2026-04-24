@@ -3,6 +3,7 @@ import { useAuthState } from "$lib/states/authState.svelte.js";
 
 const authState = useAuthState();
 
+
 const authFetch = async (url, options = {}) => {
     if (!browser) {
         throw new Error("Authenticated fetch can only be used in the browser");
@@ -14,7 +15,7 @@ const authFetch = async (url, options = {}) => {
         throw new Error("No authentication token found");
     };
 
-    // Add to Authorization header
+    // Add to Authorization header with Bearer prefix
     const headers = {
         ...options.headers,
         "Authorization": `Bearer ${token}`,
