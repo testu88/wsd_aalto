@@ -7,7 +7,7 @@ const login = async (credentials) => {
         headers: {"Content-Type":"application/json", },
         body: JSON.stringify(credentials),
     });
-    console.log("api result:", result);
+  
     return result;
 };
 
@@ -17,7 +17,7 @@ const register = async (user) => {
         headers: { "Content-Type":"application/json", },
         body: JSON.stringify(user),
     });
-    console.log("api result register:", result);
+  
     return result;
 };
 

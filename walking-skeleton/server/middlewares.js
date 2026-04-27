@@ -21,4 +21,19 @@ const authenticate = async (c, next) => {
     };
 };
 
-export { authenticate };
+const requireAnyRole =  (...requiredRoles) => {
+    return async (c ,next) => {
+        const user = c.get("user");
+        if (!user) {
+            return c.json({ error: "Authentication required"}, 401);
+        };
+        console.log("User role:", user.roles);
+        if (!user.roles || !user.roles.some((role) => requiredRoles.includes(role))){
+            return c.json({ error: "Insufficient permissions"}, 403);
+        };
+        await next();
+    };
+};
+
+
+export { authenticate, requireAnyRole };

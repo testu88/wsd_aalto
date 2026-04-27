@@ -12,4 +12,9 @@ const findByEmail = async (email) => {
     return result[0];
 };
 
-export { create, findByEmail };
+const getUserRoles = async (userId) => {
+    const result = await sql`SELECT role from user_roles WHERE user_id = ${userId}`;
+    return result.map((row) => row.role);
+};
+
+export { create, findByEmail, getUserRoles };

@@ -35,13 +35,14 @@ const login = async (c) => {
         return c.json({ error: "Invalid email or password"}, 401);
     };
 
-    const payload = { id: Number(foundUser.id), email: foundUser.email, exp: Math.floor(Date.now() / 1000) + 60 };
+    const roles = await authRespository.getUserRoles(foundUser.id);
+    const payload = { id: Number(foundUser.id), email: foundUser.email, roles, exp: Math.floor(Date.now() / 1000) + 60 };
     const token = await jwt.sign(payload, JWT_SECRET);
 
 
     return c.json({
         message: `Welcome back ${foundUser.email}!`,
-        user: { id: Number(foundUser.id),  email: foundUser.email},
+        user: payload,
         token
     });
 };

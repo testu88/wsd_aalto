@@ -29,18 +29,17 @@ const useAuthState = () => {
             return token;
         },
         login: async (email, password) => {
-            console.log("authstate email, password:", email, password);
+           
             const response = await authApi.login({email, password});
-            console.log("login authstate response:", response);
+           
             if (!response.ok) {
                 const errorData = await response.json();
                 throw new Error(errorData.error || "Login failed");
             }
             const receivedInfo = await response.json();
-            console.log("authstate login:", receivedInfo);
+          
             user = receivedInfo.user;
             token = receivedInfo.token;
-
             localStorage.setItem("user", JSON.stringify(receivedInfo.user));
             localStorage.setItem("token", receivedInfo.token);
 
@@ -48,7 +47,7 @@ const useAuthState = () => {
         },
         register: async (email, password) => {
             const response = await authApi.register({email, password});
-            console.log("register authstate response:", response);
+          
             if  (!response.ok) {
                 const errorData = await response.json();
                 throw new Error(errorData.error || "Register failed");

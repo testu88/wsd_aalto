@@ -8,6 +8,7 @@ import * as taskController from "./taskController.js";
 import * as authController from "./authController.js";
 import * as middlewares from "./middlewares.js";
 import * as readingProgressController from "./readingProgressController.js";
+import * as userController from "./userController.js";
 
 
 const app = new Hono();
@@ -18,6 +19,11 @@ app.use("/*", logger());
 
 
 // ROUTES
+
+// Admin-only 
+app.use("/api/admin/*", middlewares.authenticate, middlewares.requireAnyRole("ADMIN"));
+app.get("/api/admin/users", userController.getAllUsers);
+app.get("/api/admin/stats", userController.getStats);
 
 // User
 app.post("/api/auth/register", authController.register);
