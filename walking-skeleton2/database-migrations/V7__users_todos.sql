@@ -1,0 +1,3 @@
+DELETE FROM todo_tasks;
+DELETE FROM todos;
+ALTER TABLE todos ADD COLUMN user_id INTEGER NOT NULL REFERENCES users(id);
