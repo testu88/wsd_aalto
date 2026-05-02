@@ -6,6 +6,8 @@
     //import Joke from "$lib/components/Joke.svelte";
     import { authFetch } from "$lib/utils/fetchUtils.js";
     import { useAuthState } from "$lib/states/authState.svelte.js";
+    import Emails from "$lib/components/Emails.svelte";
+
 
     let authState =  useAuthState();
     const user = authState.user;
@@ -32,6 +34,7 @@
 
 
 <h1>Welcome to the home page!</h1>
+<Emails />
 
 
 

@@ -10,9 +10,15 @@ import * as middlewares from "./middlewares.js";
 import * as readingProgressController from "./readingProgressController.js";
 import * as userController from "./userController.js";
 import { auth } from "./betterAuth.js";
+import { zValidator } from "@hono/zod-validator";
+import * as validators from "./validators.js";
+import * as emailController from "./emailController.js";
+
 
 
 const app = new Hono();
+
+
 
 // Allow CORS request from http://localhost:5173 with credentials
 app.use("/*", cors({
@@ -22,9 +28,10 @@ app.use("/*", cors({
 app.use("/*", logger());
 
 
-
-
 // ROUTES
+
+// Validate
+app.post("/api/emails", ...emailController.createEmail);
 
 // Admin-only 
 app.use("/api/admin/*", middlewares.authenticate, middlewares.requireAnyRole("ADMIN"));
